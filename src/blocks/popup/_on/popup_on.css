@@ -1,0 +1,6 @@
+.popup_on {
+  visibility: visible;
+  position: fixed;
+  opacity: 1;
+  transition: 0.5s;
+}

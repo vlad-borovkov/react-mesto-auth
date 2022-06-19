@@ -1,0 +1,15 @@
+.popup__container-form-input_user-name {
+  margin-bottom: 0;
+}
+
+@media screen and (max-width: 580px) and (min-width: 320px)   {
+  .popup__container-form-input_user-name {
+    margin-left: 0;
+    width: 238px;
+  }
+}
+
+.popup__name::-webkit-input-placeholder {color:#000000;}
+.popup__name::-moz-placeholder          {color:#000000;}
+.popup__name:-moz-placeholder           {color:#000000;}
+.popup__name:-ms-input-placeholder      {color:#000000;}
