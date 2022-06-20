@@ -1,13 +1,32 @@
 import avatarPath from './../images/Avatar.jpg';
+import PopupWithForm from './PopupWithForm';
+
+
 
 
 function Main() {
+
+    const handleEditAvatarClick = () => {
+        document.querySelector('.popup_type_avatar').classList.add('popup_on');
+    };
+
+    const handleEditProfileClick = () => {
+        document.querySelector('.popup_type_user').classList.add('popup_on');
+    }
+    const handleAddPlaceClick = () => {
+        document.querySelector('.popup_type_place').classList.add('popup_on');
+    }
+
     return (
+        
         <main>
     <section className="profile">
 
       <div className="profile__avatar">
-        <div className="profile__avatar-overlay"></div>
+        <div 
+        className="profile__avatar-overlay"
+        onClick={handleEditAvatarClick}>
+        </div>
         <img
         className="profile__avatar-picture"
         src={avatarPath}
@@ -17,13 +36,21 @@ function Main() {
       <div className="profile__info">
         <div className="profile__info-title">
           <h1 className="profile__info-name">Жак-Ив Кусто</h1>
-          <button className="profile__info-edit-button" type="button"></button>
+          <button 
+          className="profile__info-edit-button" 
+          type="button"
+          onClick={handleEditProfileClick}></button>
         </div>
         <p className="profile__info-description">Исследователь океана</p>
       </div>
-      <button className="profile__add-button" type="button"></button>
+      <button className="profile__add-button" type="button" onClick={handleAddPlaceClick}></button>
     </section>
     <section className="photo-grid"></section>
+    
+    {/* <PopupWithForm name="user" title="Редактировать профиль"/>
+    <PopupWithForm name="place" title="Новое место"/>
+        и т.д.  */}
+
     <div className="popup popup_type_user">
       <button className="popup__user-close-icone popup__close-icone" type="button"></button>
       <div className="popup__container-form">
