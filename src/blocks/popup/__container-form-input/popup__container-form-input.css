@@ -4,7 +4,7 @@
     margin-top: 48px;
     margin-bottom: 0;
     font-family: inherit;
-    max-width: 358px;
+    width: 358px;
     margin-left: 36px;
     outline: none;
     font-style: normal;
@@ -19,7 +19,7 @@
   }
 
   @media screen and (max-width: 580px) and (min-width: 320px)   {
-    .popup__container-form-input_user-name {
+    .popup__container-form-input {
       margin-left: 0;
       width: 238px;
     }
