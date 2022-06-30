@@ -1,6 +1,7 @@
 import React from "react";
 
 const ImagePopup = (props) => {
+
   return (
     <div
       className={`popup popup_type_gallery ${props.isOpen ? "popup_on" : ""}`}
@@ -13,10 +14,10 @@ const ImagePopup = (props) => {
         ></button>
         <img
           className="popup__gallery-image"
-          src={props.selectedCard.src}
-          alt={props.selectedCard.src}
+          src={props.clickedCard.link}
+          alt={props.clickedCard.name}
         />
-        <p className="popup__gallery-description">{props.selectedCard.alt}</p>
+        <p className="popup__gallery-description">{props.clickedCard.name}</p>
       </div>
     </div>
   );

@@ -4,9 +4,9 @@ import Card from "./Card";
 import { api } from "../utils/Api";
 
 const Main = (props) => {
-  const [userAvatar, setUserAvatar] = React.useState();
-  const [userName, setUserName] = React.useState();
-  const [userDescription, setUserDescription] = React.useState();
+  const [userAvatar, setUserAvatar] = React.useState("");
+  const [userName, setUserName] = React.useState("");
+  const [userDescription, setUserDescription] = React.useState("");
   const [cards, setPlaceCards] = React.useState([]);
 
   React.useEffect(() => {
@@ -15,6 +15,9 @@ const Main = (props) => {
       setUserName(res.name);
       setUserDescription(res.about);
       setPlaceCards(cardList);
+    })
+    .catch((err) => {
+      console.log(`Упс, ошибка ${err}`);
     });
   }, []);
   return (
@@ -39,7 +42,7 @@ const Main = (props) => {
               className="profile__info-edit-button"
               type="button"
               onClick={props.onEditProfile}
-            ></button>
+            />
           </div>
           <p className="profile__info-description">{userDescription}</p>
         </div>
@@ -47,24 +50,18 @@ const Main = (props) => {
           className="profile__add-button"
           type="button"
           onClick={props.onAddPlace}
-        ></button>
+        />
       </section>
-
       <section>
         <>
           <ul className="photo-grid">
             {cards.map((cardItem) => (
-              <li key={cardItem._id}>
-                {" "}
-                {
                   <Card
-                    cardValue={cardItem}
-                    handleClickCard={props.handleClick}
-                  />
-                }{" "}
-              </li>
+                    key={cardItem._id}
+                    card={cardItem}
+                    onCardClick={props.clickOnCard}
+                  />  
             ))}
-            ;
           </ul>
         </>
       </section>

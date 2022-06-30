@@ -5,6 +5,7 @@ import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
+import Card from "./Card";
 
 const App = () => {
   const [isEditAvatarPopupOpen, onEditAvatar] = React.useState(false);
@@ -21,25 +22,22 @@ const App = () => {
   const handleClickPlace = () => {
     onAddPlace(!isAddPlacePopupOpen);
   };
-
   const closeAllPopups = () => {
     onEditAvatar(false);
     onEditProfile(false);
     onAddPlace(false);
     onGalleryPopup(false);
+    setSelectedCard({});
   };
 
   const [isGalleryPopupOpen, onGalleryPopup] = React.useState(false);
-
   const [selectedCard, setSelectedCard] = React.useState({});
-  const handleClickCard = (event) => {
-    const selectedCard = {};
-    selectedCard.alt = event.target.alt;
-    selectedCard.src = event.target.src;
 
-    setSelectedCard(selectedCard);
+  const handleClickOnCard = (card) => {
     onGalleryPopup(!isGalleryPopupOpen);
-  };
+    setSelectedCard(card);
+  }
+ 
 
   return (
     <div className="page">
@@ -48,11 +46,11 @@ const App = () => {
         onEditAvatar={handleClickAvatar}
         onEditProfile={handleClickProfile}
         onAddPlace={handleClickPlace}
-        handleClick={handleClickCard}
+        clickOnCard={handleClickOnCard}
       />
 
       <ImagePopup
-        selectedCard={selectedCard}
+        clickedCard={selectedCard}
         closeAllPopup={closeAllPopups}
         isOpen={isGalleryPopupOpen}
       />
