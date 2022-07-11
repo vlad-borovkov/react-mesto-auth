@@ -25,19 +25,18 @@ class Api {
 
   getUserValue() {
     const infoUsersDefault = "/users/me";
+    return this.makeRequest(infoUsersDefault)
+  }
+
+  getCardsFromServer() {
     const cardsFromServer = "/cards";
-    return Promise.all([
-      this.makeRequest(infoUsersDefault),
-      this.makeRequest(cardsFromServer),
-    ]);
+    return this.makeRequest(cardsFromServer)
   }
 
   changeUserInfo(userValue) {
-    this._userName = userValue.firstname;
-    this._userDescription = userValue.description;
-
     const requestUrl = "/users/me";
-    const userData = { name: this._userName, about: this._userDescription };
+    const userData = userValue;
+    
     //передать объект на сервер
     return this.makeRequest(requestUrl, "PATCH", userData);
   }
@@ -50,6 +49,11 @@ class Api {
   handlerAddCard(cardsData) {
     const requestUrl = "/cards";
     return this.makeRequest(requestUrl, "POST", cardsData);
+  }
+
+  changeLikeCardStatus(cardId, islikedState) {
+    const requestUrl = `/cards/${cardId}/likes`;
+    return this.makeRequest(requestUrl, `${islikedState ? "PUT" : "DELETE"}`)
   }
 
   deleteLikeOnCard(cardId) {
