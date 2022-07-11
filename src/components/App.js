@@ -159,6 +159,7 @@ const App = () => {
           closeAllPopup={closeAllPopups}
           isOpen={isGalleryPopupOpen}
         />
+    
       </CurrentUserContext.Provider>
       <Footer />
     </div>

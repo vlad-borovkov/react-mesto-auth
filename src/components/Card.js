@@ -30,7 +30,7 @@ const Card = (props) => {
     }
 
   return (
-    <li>
+    <li style={{ listStyleType: "none" }}>
       <div className="card">
         <img
           className="card__image"
