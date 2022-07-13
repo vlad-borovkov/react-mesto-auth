@@ -7,31 +7,37 @@ import ImagePopup from "./ImagePopup";
 import EditProfilePopup from "./EditeProfilePopup";
 import EditAvatarPopup from "./EditAvatarProfile";
 import AddPlacePopup from "./AddPlacePopup";
+import ConfirmDeletePopup from "./ConfirmDeletePopup";
 import { api } from "../utils/Api";
 import { CurrentUserContext } from "./../contexts/CurrentUserContext";
 import { CardsContext } from "./../contexts/CardsContext";
 import Card from "./Card";
 
 const App = () => {
-  const [isEditAvatarPopupOpen, onEditAvatar] = React.useState(false);
+  const [isEditAvatarPopupOpen, setEditAvatar] = React.useState(false);
   const handleClickAvatar = () => {
-    onEditAvatar(!isEditAvatarPopupOpen);
+    setEditAvatar(!isEditAvatarPopupOpen);
   };
 
-  const [isEditProfilePopupOpen, onEditProfile] = React.useState(false);
+  const [isEditProfilePopupOpen, setEditProfile] = React.useState(false);
   const handleClickProfile = () => {
-    onEditProfile(!isEditProfilePopupOpen);
+    setEditProfile(!isEditProfilePopupOpen);
   };
 
-  const [isAddPlacePopupOpen, onAddPlace] = React.useState(false);
+  const [isAddPlacePopupOpen, setAddPlace] = React.useState(false);
   const handleClickPlace = () => {
-    onAddPlace(!isAddPlacePopupOpen);
+    setAddPlace(!isAddPlacePopupOpen);
   };
+  const [isConfirmDeletePopupOpen, setConfirmDeletePopupOpen] = React.useState(false);
+  const handleFirstDelete = () => {
+    setConfirmDeletePopupOpen(!isConfirmDeletePopupOpen);
+  }
   const closeAllPopups = () => {
-    onEditAvatar(false);
-    onEditProfile(false);
-    onAddPlace(false);
+    setEditAvatar(false);
+    setEditProfile(false);
+    setAddPlace(false);
     onGalleryPopup(false);
+    setConfirmDeletePopupOpen(false);
     setSelectedCard({});
   };
   //открытие ZOOM галлереи
@@ -81,13 +87,24 @@ const App = () => {
         console.log(`Упс, ошибка ${err}`);
       });
   }
+  
   //удаляем карточку пользователя
-  function handleDeleteClick(card) {
-    //console.log(card)
-    api.deleteCard(card._id).catch((err) => {
-      console.log(`Упс, ошибка ${err}`);
-    });
-    setPlaceCards(cards.filter((item) => item._id !== card._id));
+  const [cardForDelete, setCardForDelete] = React.useState({})
+  function saveCardForDelete (card) {
+    setCardForDelete(card)
+  }
+
+  const handleDeleteConfirm = () => {
+      api
+      .deleteCard(cardForDelete._id)
+      .then(()=> setPlaceCards(cards.filter((item) => item._id !== cardForDelete._id)))
+      .then(()=> setCardForDelete({}))
+      .then(() => {
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(`Упс, ошибка ${err}`);
+      });
   }
 
   function handleUpdateUser(userValueForm) {
@@ -96,10 +113,12 @@ const App = () => {
       .then((res) => {
         setCurrentUser(res);
       })
+      .then(() => {
+        closeAllPopups();
+      })
       .catch((err) => {
         console.log(`Упс, ошибка ${err}`);
       });
-    closeAllPopups();
   }
   function handleUpdateAvatar(avatarValueForm) {
     api
@@ -107,17 +126,26 @@ const App = () => {
       .then((res) => {
         setCurrentUser(res);
       })
+      .then(() => {
+        closeAllPopups();
+      })
       .catch((err) => {
         console.log(`Упс, ошибка ${err}`);
       });
-    closeAllPopups();
   }
 
   function handleAddPlace(newCard) {
-    api.handlerAddCard(newCard).then((res) => {
-      setPlaceCards([res, ...cards]) 
-    })
-    closeAllPopups();
+    api
+      .handlerAddCard(newCard)
+      .then((res) => {
+        setPlaceCards([res, ...cards]);
+      })
+      .then(() => {
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(`Упс, ошибка ${err}`);
+      });
   }
 
   return (
@@ -131,9 +159,9 @@ const App = () => {
             onAddPlace={handleClickPlace}
             clickOnCard={handleClickOnCard}
             handleCardLike={(card) => handleCardLike(card)}
-            handleDeleteClick={handleDeleteClick}
+            handleDeleteClick={saveCardForDelete}
+            onConfirmDelete={handleFirstDelete}
           />
-
         </CardsContext.Provider>
 
         <EditProfilePopup
@@ -159,7 +187,13 @@ const App = () => {
           closeAllPopup={closeAllPopups}
           isOpen={isGalleryPopupOpen}
         />
-    
+
+        <ConfirmDeletePopup
+        isOpen={isConfirmDeletePopupOpen}
+        onClose={closeAllPopups}
+        onDeleteCard={()=>handleDeleteConfirm()}
+        />
+        
       </CurrentUserContext.Provider>
       <Footer />
     </div>

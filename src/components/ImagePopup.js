@@ -1,7 +1,6 @@
 import React from "react";
 
 const ImagePopup = (props) => {
-
   return (
     <div
       className={`popup popup_type_gallery ${props.isOpen ? "popup_on" : ""}`}

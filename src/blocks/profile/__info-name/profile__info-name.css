@@ -11,7 +11,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  max-width: 294px;
+  max-width: 320px;
 }
 
 @media screen and (max-width: 660px) and (min-width: 320px) {

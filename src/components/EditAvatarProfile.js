@@ -12,6 +12,10 @@ const EditAvatarPopup = (props) => {
             avatar: avatarRef.current.value,
           });
     }
+//очистка инпута
+React.useEffect(()=> {
+  avatarRef.current.value = ""
+}, [props.isOpen])
 
     return (
         <PopupWithForm
@@ -23,7 +27,6 @@ const EditAvatarPopup = (props) => {
         onSubmit={handleAvatarChange}
         closeAllPopups={props.onClose}
       >
-        <>
           <input
             ref={avatarRef}
             id="avatar-input"
@@ -36,7 +39,6 @@ const EditAvatarPopup = (props) => {
             required
           />
           <span className="avatar-input-error popup__error"></span>
-        </>
       </PopupWithForm>
     )
 }

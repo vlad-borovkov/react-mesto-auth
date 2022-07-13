@@ -6,7 +6,6 @@ import { CurrentUserContext } from "./../contexts/CurrentUserContext";
 import { CardsContext } from "./../contexts/CardsContext";
 
 const Main = (props) => {
- 
   //подписка на контексты currentUser, CardsContext с помощью хука useContext
   const currentUserInfo = React.useContext(CurrentUserContext);
   const currenCardsData = React.useContext(CardsContext);
@@ -43,23 +42,20 @@ const Main = (props) => {
           onClick={props.onAddPlace}
         />
       </section>
-
       <section>
-        <>
-          <ul className="photo-grid">
-            {currenCardsData.map((cardItem) => (
-                  <Card
-                    key={cardItem._id}
-                    card={cardItem}
-                    onCardClick={props.clickOnCard}
-                    onCardLike={props.handleCardLike}
-                    onCardDelete={props.handleDeleteClick}
-                  />  
-            ))}
-          </ul>
-        </>
+        <ul className="photo-grid">
+          {currenCardsData.map((cardItem) => (
+            <Card
+              key={cardItem._id}
+              card={cardItem}
+              onCardClick={props.clickOnCard}
+              onCardLike={props.handleCardLike}
+              onCardDelete={props.handleDeleteClick}
+              onConfirmDelete={props.onConfirmDelete}
+            />
+          ))}
+        </ul>
       </section>
-
       <div className="popup popup_type_delete">
         <button
           className="popup__delete-close-icone popup__close-icone"
@@ -69,7 +65,6 @@ const Main = (props) => {
           <form
             className="popup__form popup__delete-form"
             name="delete"
-            noValidate
           >
             <h2 className="popup__container-form-title">Вы уверены?</h2>
             <button

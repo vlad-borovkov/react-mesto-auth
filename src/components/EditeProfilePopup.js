@@ -9,7 +9,7 @@ const EditProfilePopup = (props) => {
     React.useEffect(() => {
         setName(currentUserInfo.name);
         setDescription(currentUserInfo.about);
-    }, [currentUserInfo]); 
+    }, [currentUserInfo, props.isOpen]); 
 
 //стейты инпутов и ручной захват значений инпутов
     const [name, setName] = React.useState('');
@@ -43,10 +43,9 @@ function handleSubmitEditeProfile(e) {
     onSubmit={handleSubmitEditeProfile}
     closeAllPopups={props.onClose}
   >
-    <>
       <input
         onChange={handleNameChange}
-        value={name}
+        value={name || ""}
         id="name-input"
         className="popup__container-form-input popup__container-form-input_user-name"
         type="text"
@@ -59,7 +58,7 @@ function handleSubmitEditeProfile(e) {
       <span className="name-input-error popup__error"></span>
       <input
         onChange={handleDescriptionChange}
-        value={description}
+        value={description || ""}
         id="description-input"
         className="popup__container-form-input popup__container-form-input_user-description"
         type="text"
@@ -70,7 +69,6 @@ function handleSubmitEditeProfile(e) {
         required
       />
       <span className="description-input-error popup__error"></span>
-    </>
   </PopupWithForm>
     )
 }

@@ -1,8 +1,6 @@
 import React from "react";
 
 const PopupWithForm = (props) => {
-
-
   return (
     <div
       className={`popup popup_type_${props.name} ${
@@ -16,10 +14,10 @@ const PopupWithForm = (props) => {
       ></button>
       <div className="popup__container-form">
         <form
-        onSubmit={props.onSubmit} 
-        className="popup__form" 
-        name={`${props.name}-profile`} 
-        noValidate>
+          onSubmit={props.onSubmit}
+          className="popup__form"
+          name={`${props.name}-profile`}
+        >
           <h2 className="popup__container-form-title">{props.title}</h2>
           {props.children}
           <button
