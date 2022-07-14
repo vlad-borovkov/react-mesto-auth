@@ -30,9 +30,7 @@ function handleSubmitEditeProfile(e) {
         name,
         about: description,
     });
-
   }
-
     return (
     <PopupWithForm
     name="user"
