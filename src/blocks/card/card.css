@@ -1,0 +1,8 @@
+.card {
+  border-radius: 10px;
+  max-width: 282px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
