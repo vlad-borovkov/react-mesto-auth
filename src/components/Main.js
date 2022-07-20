@@ -1,9 +1,9 @@
 import React from "react";
-import avatarPath from "./../images/Avatar.jpg";
-import Card from "./Card";
-import { api } from "../utils/Api";
+
 import { CurrentUserContext } from "./../contexts/CurrentUserContext";
 import { CardsContext } from "./../contexts/CardsContext";
+
+import Card from "./Card";
 
 const Main = (props) => {
   //подписка на контексты currentUser, CardsContext с помощью хука useContext
@@ -56,27 +56,6 @@ const Main = (props) => {
           ))}
         </ul>
       </section>
-      <div className="popup popup_type_delete">
-        <button
-          className="popup__delete-close-icone popup__close-icone"
-          type="button"
-        ></button>
-        <div className="popup__container-form">
-          <form
-            className="popup__form popup__delete-form"
-            name="delete"
-          >
-            <h2 className="popup__container-form-title">Вы уверены?</h2>
-            <button
-              className="popup__container-form-submit-button popup__container-form-submit-button_type_delete"
-              type="submit"
-              value="Да"
-            >
-              Да
-            </button>
-          </form>
-        </div>
-      </div>
     </main>
   );
 };

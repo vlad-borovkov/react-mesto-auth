@@ -1,0 +1,18 @@
+.header__sign-in-button {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: right;
+  color: #FFFFFF;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  object-fit: cover;
+  border: 0px;
+}
+
+.header__sign-in-button:hover {
+    opacity: 0.6;
+  }

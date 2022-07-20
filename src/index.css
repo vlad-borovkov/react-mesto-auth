@@ -1,15 +1,20 @@
 @import url(./vendor/normalize.css);
 @import url(./vendor/fonts/fonts.css);
+
 @import url(./blocks/page/page.css);
+
 @import url(./blocks/header/header.css);
 @import url(./blocks/header/__group-logo/header__group-logo.css);
+@import url(./blocks/header/__menu/header__menu.css);
+@import url(./blocks/header/__sign-in-button/header__sign-in-button.css);
+@import url(./blocks/header/__user-email/header__user-email.css);
+
 @import url(./blocks/profile/profile.css);
 @import url(./blocks/profile/__info/profile__info.css);
 @import url(./blocks/profile/__info-title/profile__info-title.css);
 @import url(./blocks/profile/__avatar/profile__avatar.css);
 @import url(./blocks/profile/__avatar-overlay/profile__avatar-overlay.css);
 @import url(./blocks/profile/__avatar-picture/profile__avatar-picture.css);
-
 
 @import url(./blocks/profile/__info-name/profile__info-name.css);
 @import url(./blocks/profile/__info-edit-button/profile__info-edit-button.css);
@@ -89,5 +94,18 @@
 
 @import url(./blocks/popup/__error/popup__error.css);
 @import url(./blocks/popup/__error/_visible/popup__error_visible.css);
+
+@import url(./blocks/entry-user/entry-user.css);
+@import url(./blocks/entry-user/_on/entry-user_on.css);
+@import url(./blocks/entry-user/_type/_login/entry-user_type_login.css);
+@import url(./blocks/entry-user/_type/_register/entry-user_type_register.css);
+@import url(./blocks/entry-user/__container-form-input_email/entry-user__container-form-input_email.css);
+@import url(./blocks/entry-user/__container-form-input_password/entry-user__container-form-input_password.css);
+@import url(./blocks/entry-user/__container-form-submit-button/entry-user__container-form-submit-button.css);
+@import url(./blocks/entry-user/__container-form-title/entry-user__container-form-title.css);
+@import url(./blocks/entry-user/__container-form/entry-user__container-form.css);
+@import url(./blocks/entry-user/__form/entry-user__form.css);
+
+
 
 

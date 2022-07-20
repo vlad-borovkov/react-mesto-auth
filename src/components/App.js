@@ -1,6 +1,13 @@
 import React from "react";
+
+import { CurrentUserContext } from "./../contexts/CurrentUserContext";
+import { CardsContext } from "./../contexts/CardsContext";
+
 import "./../index.css";
-import Header from "./Header";
+
+import { api } from "../utils/Api";
+
+//import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
 import ImagePopup from "./ImagePopup";
@@ -8,10 +15,8 @@ import EditProfilePopup from "./EditeProfilePopup";
 import EditAvatarPopup from "./EditAvatarProfile";
 import AddPlacePopup from "./AddPlacePopup";
 import ConfirmDeletePopup from "./ConfirmDeletePopup";
-import { api } from "../utils/Api";
-import { CurrentUserContext } from "./../contexts/CurrentUserContext";
-import { CardsContext } from "./../contexts/CardsContext";
-import Card from "./Card";
+
+
 
 const App = () => {
   const [isEditAvatarPopupOpen, setEditAvatar] = React.useState(false);
@@ -150,7 +155,7 @@ const App = () => {
 
   return (
     <div className="page">
-      <Header />
+      {/* <Header /> */}
       <CurrentUserContext.Provider value={currentUser}>
         <CardsContext.Provider value={cards}>
           <Main

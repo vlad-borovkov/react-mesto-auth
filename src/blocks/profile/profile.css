@@ -3,6 +3,7 @@
   flex-direction: row;
   align-items: center;
   margin: 0 auto;
+  padding-top: 40px;
   max-width: 880px;
 }
 
