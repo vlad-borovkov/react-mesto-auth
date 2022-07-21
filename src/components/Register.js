@@ -52,7 +52,7 @@ function handlerSubmitRegisrtation(e) {
         minLength="6"
         maxLength="50"
         required
-      />
+      /> 
     </EntryUserForm>
   );
 };

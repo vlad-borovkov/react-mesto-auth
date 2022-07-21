@@ -13,6 +13,8 @@ function Header(props) {
         />
         <nav className="header__menu">
           <p className="header__user-email">my-email@laika.com</p>
+          {/* прописать логику, прокинуть через глобальный стейт - 
+          если не зареганый пользователь, зарегистрироваться */}
           <button className="header__sign-in-button">Войти</button>
         </nav>
       </header>

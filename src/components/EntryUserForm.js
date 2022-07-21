@@ -23,6 +23,9 @@ const EntryUserForm = (props) => {
             {`${props.buttonOnText}`}
           </button>
         </form>
+              {/* прописать логику, прокинуть через глобальный стейт 
+              - если не зареганый пользователь, показать */}
+      <p className="entry-user_login-reminder">Уже зарегистрированы? Войти</p>
       </div>
     </div>
   );
