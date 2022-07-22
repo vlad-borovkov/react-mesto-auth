@@ -1,0 +1,13 @@
+.popup__container-disclamer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 430px;
+    height: 330px;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    font-family: Inter, Arial, sans-serif;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+   
+}

@@ -49,7 +49,7 @@ const App = () => {
   const pushSuccessRegistration = () => {
     setSuccessRegistrationPopupOpen(!isSuccessRegistrationPopupOpen)
   }
-
+ 
   const [isFailRegistrationPopupOpen, setFailRegistrationPopupOpen ] = React.useState(false);
   const pushFailRegistration = () => {
     setFailRegistrationPopupOpen(!isFailRegistrationPopupOpen)
@@ -176,6 +176,9 @@ const App = () => {
   function handlerSubmitRegister(registerValue) {
     console.log(registerValue);
   }
+  function handlerSubmitLogin(registerValue) {
+    console.log(registerValue);
+  }
 
   return (
     <div className="page">
@@ -195,20 +198,16 @@ const App = () => {
               />
             </Route>
             <Route path="/sign-up">
-              <Register onUpdater={handlerSubmitRegister} />
+              <Register 
+              onUpdater={handlerSubmitRegister} />
             </Route>
             <Route path="/sign-in">
               <Login 
+              onUpdater={handlerSubmitLogin}
               />
             </Route>
           </Switch>
         </CardsContext.Provider>
-
-        <SuccessRegistrationPopup
-        isOpen={isSuccessRegistrationPopupOpen}/>
-
-        <FailRegistrationPopup
-        isOpen={isFailRegistrationPopupOpen}/>
 
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
@@ -238,6 +237,16 @@ const App = () => {
           isOpen={isConfirmDeletePopupOpen}
           onClose={closeAllPopups}
           onDeleteCard={() => handleDeleteConfirm()}
+        />
+        
+        <SuccessRegistrationPopup 
+        isOpen={false} //pushSuccessRegistration
+        onClose={closeAllPopups}
+        />
+
+        <FailRegistrationPopup
+        isOpen={false} //pushFailRegistration
+        onClose={closeAllPopups}
         />
       </CurrentUserContext.Provider>
       <Footer />

@@ -8,14 +8,13 @@ const PopupWithOutForm = (props) => {
       }`}
     >
       <button
-        className={`popup__${props.onClose}-icone popup__close-icone`}
+        className="popup__close-icone"
         type="button"
         onClick={props.closeAllPopups}
       ></button>
-      <div className="popup__container-message">
-        {props.children}
+      <div className="popup__container-disclamer"> 
+      {props.children}
       </div>
-
     </div>
   );
 };
