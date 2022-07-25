@@ -1,6 +1,6 @@
 import logoPath from "./../images/logo.svg";
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link, withRouter, NavLink } from 'react-router-dom';
 
 function Header(props) {
   return (
@@ -12,10 +12,14 @@ function Header(props) {
           alt="логотип сайта место"
         />
         <nav className="header__menu">
-          <p className="header__user-email">my-email@laika.com</p>
+          <p className="header__user-email">{props.onLogin}</p>
           {/* прописать логику, прокинуть через глобальный стейт - 
           если не зареганый пользователь, зарегистрироваться */}
-          <button className="header__sign-in-button">Войти</button>
+          <button className="header__sign-in-button">
+          <Link to="/sign-up">
+            Войти
+          </Link>
+          </button>
         </nav>
       </header>
     </div>

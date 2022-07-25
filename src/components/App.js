@@ -4,11 +4,12 @@ import { CurrentUserContext } from "./../contexts/CurrentUserContext";
 import { CardsContext } from "./../contexts/CardsContext";
 //import ReactDOM from "react-dom/client";
 
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 
 import "./../index.css";
 
 import { api } from "../utils/Api";
+import * as auth from "../Auth.js";
 
 import Header from "./Header";
 import Main from "./Main";
@@ -22,6 +23,7 @@ import Register from "./Register";
 import Login from "./Login";
 import FailRegistrationPopup from "./FailRegistrationPopup";
 import SuccessRegistrationPopup from "./SuccessRegistrationPopup";
+import ProtectedRoute from "./ProtectedRoute";
 
 const App = () => {
   const [isEditAvatarPopupOpen, setEditAvatar] = React.useState(false);
@@ -45,15 +47,17 @@ const App = () => {
   };
 
   //popup уведомление о регистрации
-  const [isSuccessRegistrationPopupOpen, setSuccessRegistrationPopupOpen ] = React.useState(true);
+  const [isSuccessRegistrationPopupOpen, setSuccessRegistrationPopupOpen] =
+    React.useState(false);
   const pushSuccessRegistration = () => {
-    setSuccessRegistrationPopupOpen(!isSuccessRegistrationPopupOpen)
-  }
- 
-  const [isFailRegistrationPopupOpen, setFailRegistrationPopupOpen ] = React.useState(false);
+    setSuccessRegistrationPopupOpen(!isSuccessRegistrationPopupOpen);
+  };
+
+  const [isFailRegistrationPopupOpen, setFailRegistrationPopupOpen] =
+    React.useState(false);
   const pushFailRegistration = () => {
-    setFailRegistrationPopupOpen(!isFailRegistrationPopupOpen)
-  }
+    setFailRegistrationPopupOpen(!isFailRegistrationPopupOpen);
+  };
 
   const closeAllPopups = () => {
     setEditAvatar(false);
@@ -61,6 +65,8 @@ const App = () => {
     setAddPlace(false);
     onGalleryPopup(false);
     setConfirmDeletePopupOpen(false);
+    setFailRegistrationPopupOpen(false);
+    setSuccessRegistrationPopupOpen(false);
     setSelectedCard({});
   };
   //открытие ZOOM галлереи
@@ -172,39 +178,77 @@ const App = () => {
         console.log(`Упс, ошибка ${err}`);
       });
   }
-
+  const history = useHistory();
+  //регистрация пользователя
   function handlerSubmitRegister(registerValue) {
-    console.log(registerValue);
+    
+    //console.log(registerValue);
+    auth.register(registerValue)
+    .then((res) => {
+      if (res.data._id) {
+        pushSuccessRegistration();
+      }
+      else {
+        pushFailRegistration();
+      }
+    })
+    .catch((err) => {
+      console.log(`Упс, ошибка ${err}`);
+    });
   }
+  //авторизация пользователя, стейт атворизации для защищенного роута
+  const [loggedIn, setLoggedIn] = React.useState(false);
   function handlerSubmitLogin(registerValue) {
-    console.log(registerValue);
+    //console.log(registerValue);
+    auth
+      .authorize(registerValue)
+      .then(setLoggedIn(true))
+      .catch((err) => {
+        console.log(`Упс, ошибка ${err}`);
+      });
   }
+  console.log(loggedIn)
+  //получение текущего Email после авторизации и рендеринг в Header
+  const [currenUserEmail, setCurrenUserEmail] = React.useState("");
+  React.useEffect(() => {
+    if (localStorage.getItem("jwt")) {
+      const jwt = localStorage.getItem("jwt");
+
+      auth
+        .checkToken(jwt)
+        .then((data) => setCurrenUserEmail(data.data.email))
+        .then(setCurrenUserEmail(""))
+        .catch((err) => {
+          console.log(`Упс, ошибка ${err}`);
+        });
+    }
+  }, []);
 
   return (
     <div className="page">
-      <Header />
+      <Header onLogin={currenUserEmail} />
       <CurrentUserContext.Provider value={currentUser}>
         <CardsContext.Provider value={cards}>
+        {loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />}
           <Switch>
-            <Route exact path="/">
-              <Main
-                onEditAvatar={handleClickAvatar}
-                onEditProfile={() => handleClickProfile()}
-                onAddPlace={handleClickPlace}
-                clickOnCard={handleClickOnCard}
-                handleCardLike={(card) => handleCardLike(card)}
-                handleDeleteClick={saveCardForDelete}
-                onConfirmDelete={handleFirstDelete}
-              />
-            </Route>
+            <ProtectedRoute
+              exact
+              path="/"
+              loggedIn={loggedIn}
+              component={Main}
+              onEditAvatar={handleClickAvatar}
+              onEditProfile={() => handleClickProfile()}
+              onAddPlace={handleClickPlace}
+              clickOnCard={handleClickOnCard}
+              handleCardLike={(card) => handleCardLike(card)}
+              handleDeleteClick={saveCardForDelete}
+              onConfirmDelete={handleFirstDelete}
+            />
             <Route path="/sign-up">
-              <Register 
-              onUpdater={handlerSubmitRegister} />
+              <Register onUpdater={handlerSubmitRegister} />
             </Route>
             <Route path="/sign-in">
-              <Login 
-              onUpdater={handlerSubmitLogin}
-              />
+              <Login onUpdater={handlerSubmitLogin} />
             </Route>
           </Switch>
         </CardsContext.Provider>
@@ -238,15 +282,15 @@ const App = () => {
           onClose={closeAllPopups}
           onDeleteCard={() => handleDeleteConfirm()}
         />
-        
-        <SuccessRegistrationPopup 
-        isOpen={false} //pushSuccessRegistration
-        onClose={closeAllPopups}
+
+        <SuccessRegistrationPopup
+          isOpen={isSuccessRegistrationPopupOpen}
+          onClose={closeAllPopups}
         />
 
         <FailRegistrationPopup
-        isOpen={false} //pushFailRegistration
-        onClose={closeAllPopups}
+          isOpen={isFailRegistrationPopupOpen}
+          onClose={closeAllPopups}
         />
       </CurrentUserContext.Provider>
       <Footer />

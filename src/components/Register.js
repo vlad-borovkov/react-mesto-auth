@@ -1,8 +1,9 @@
 import React from "react";
 import EntryUserForm from "./EntryUserForm";
 
-const Register = (props) => {
 
+const Register = (props) => {
+  
 const [emailInput, setEmailInput] = React.useState('');
 function handleEmailChange(e) {
     setEmailInput(e.target.value)
@@ -19,6 +20,7 @@ function handlerSubmitRegisrtation(e) {
         email: emailInput,
         password: passwordInput
     })
+    
 }
 
   return (

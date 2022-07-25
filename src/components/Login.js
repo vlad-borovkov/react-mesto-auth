@@ -1,5 +1,6 @@
 import React from "react";
 import EntryUserForm from "./EntryUserForm";
+import * as auth from '../Auth.js'
 
 const Login = (props) => {
   const [emailInput, setEmailInput] = React.useState("");

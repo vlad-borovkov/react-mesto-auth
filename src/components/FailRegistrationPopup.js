@@ -1,10 +1,10 @@
 import React from "react";
-import PopupWithOutForm from "./PopupWithOutForm";
+import InfoTooltip from "./InfoTooltip";
 import FailRegistration from "./../images/Fail.svg";
 
 const FailRegistrationPopup = (props) => {
   return (
-    <PopupWithOutForm
+    <InfoTooltip
       name="fail-registration"
       onClose="fail-registration-close"
       isOpen={props.isOpen}
@@ -17,7 +17,7 @@ const FailRegistrationPopup = (props) => {
       />
       <p className="popup__event-message">Что-то пошло не так!
 Попробуйте ещё раз.</p>
-    </PopupWithOutForm>
+    </InfoTooltip>
   );
 };
 

@@ -1,10 +1,10 @@
 import React from "react";
-import PopupWithOutForm from "./PopupWithOutForm";
+import InfoTooltip from "./InfoTooltip";
 import SuccessDownloadPath from "./../images/Success.svg";
 
 const SuccessRegistrationPopup = (props) => {
   return (
-    <PopupWithOutForm
+    <InfoTooltip
       name="success-registration"
       onClose="fail-registration-close"
       isOpen={props.isOpen}
@@ -16,7 +16,7 @@ const SuccessRegistrationPopup = (props) => {
         alt="авторизация прошла успешно"
       />
       <p className="popup__event-message">Вы успешно зарегистрировались!</p>
-    </PopupWithOutForm>
+    </InfoTooltip>
   );
 };
 

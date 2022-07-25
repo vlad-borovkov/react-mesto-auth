@@ -9,12 +9,6 @@ import App from './components/App';
 // import Header from './components/Header';
 //import "./index.css";
 
-
-
-
-
-
-
 // const handleRegisterOpen = () => {
 //   setRegister(!isRegisterOpen);
 // }

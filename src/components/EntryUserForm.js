@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, withRouter } from 'react-router-dom';
 
 const EntryUserForm = (props) => {
   return (
@@ -23,9 +24,14 @@ const EntryUserForm = (props) => {
             {`${props.buttonOnText}`}
           </button>
         </form>
-              {/* прописать логику, прокинуть через глобальный стейт 
+        {/* прописать логику, прокинуть через глобальный стейт 
               - если не зареганый пользователь, показать */}
-      <p className="entry-user_login-reminder">Уже зарегистрированы? Войти</p>
+        <p className="entry-user_login-reminder">
+          Уже зарегистрированы?
+          <Link to="/sign-in" className="signup__link">
+            Войти
+          </Link>
+        </p>
       </div>
     </div>
   );

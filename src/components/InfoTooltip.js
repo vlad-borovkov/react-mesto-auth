@@ -1,6 +1,6 @@
 import React from "react";
 
-const PopupWithOutForm = (props) => {
+const InfoTooltip = (props) => {
   return (
     <div
       className={`popup popup_type_${props.name} ${
@@ -18,4 +18,4 @@ const PopupWithOutForm = (props) => {
     </div>
   );
 };
-export default PopupWithOutForm;
+export default InfoTooltip;
