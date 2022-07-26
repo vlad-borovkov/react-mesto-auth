@@ -1,14 +1,8 @@
 import React from "react";
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const EntryUserForm = (props) => {
 
-  let history = useHistory()
-
-  function handleLoginClick() {
-    history.push("/sign-ip")
-  }
-    
   return (
     <div
       className={`entry-user entry-user_type_${props.name} ${props.isOpen ? "entry-user_on" : ""}`}
@@ -32,9 +26,8 @@ const EntryUserForm = (props) => {
         </form>
         
         <p className={`entry-user_login-reminder ${props.isLoginOpen ? "entry-user__login-reminder_off" : ""}`}>
-          Уже зарегистрированы?
-          <Link to="/sign-in" className="signup__link" onClick={handleLoginClick}>
-            Войти
+          Уже зарегистрированы?   <Link to="/sign-in" className="entry-user__login-reminder-link">
+          Войти
           </Link>
         </p>
 

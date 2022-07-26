@@ -6,8 +6,10 @@
 @import url(./blocks/header/header.css);
 @import url(./blocks/header/__group-logo/header__group-logo.css);
 @import url(./blocks/header/__menu/header__menu.css);
-@import url(./blocks/header/__sign-in-button/header__sign-in-button.css);
+@import url(./blocks/header/__sign-in-up-button/header__sign-in-up-button.css);
+@import url(./blocks/header/__sign-in-up-button/_logout/header__sign-in-up-button_logout.css);
 @import url(./blocks/header/__user-email/header__user-email.css);
+
 
 @import url(./blocks/profile/profile.css);
 @import url(./blocks/profile/__info/profile__info.css);
@@ -108,6 +110,7 @@
 @import url(./blocks/entry-user/__container-form-title/entry-user__container-form-title.css);
 @import url(./blocks/entry-user/__login-reminder/entry-user__login-reminder.css);
 @import url(./blocks/entry-user/__login-reminder/_off/entry-user__login-reminder_off.css);
+@import url(./blocks/entry-user/__login-reminder-link/entry-user__login-reminder-link.css);
 @import url(./blocks/entry-user/__container-form/entry-user__container-form.css);
 @import url(./blocks/entry-user/__form/entry-user__form.css);
 

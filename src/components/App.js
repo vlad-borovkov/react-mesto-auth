@@ -183,8 +183,8 @@ const App = () => {
   //регистрация пользователя
   function handlerSubmitRegister(registerValue) {
     auth.register(registerValue)
-    .then((res) => {
-      if (res.data._id) {
+    .then((data) => {
+      if (data.data._id) {
         pushSuccessRegistration();
       }
     })
@@ -200,12 +200,14 @@ const App = () => {
     auth
       .authorize(registerValue)
       .then(setLoggedIn(true))
+      .then(history.push("/"))
       .catch((err) => {
         console.log(`Упс, ошибка ${err}`);
       });
   }
   //получение текущего Email после авторизации и рендеринг в Header
   const [currenUserEmail, setCurrenUserEmail] = React.useState("");
+  
   React.useEffect(() => {
     if (localStorage.getItem("jwt")) {
       const jwt = localStorage.getItem("jwt");
@@ -219,10 +221,18 @@ const App = () => {
         });
     }
   }, []);
+  //выход из личного кабинета
+  function handleLogOut() {
+    localStorage.removeItem("jwt");
+    setLoggedIn(false);
+    setCurrenUserEmail("");
+  }
 
   return (
     <div className="page">
-      <Header onLogin={currenUserEmail} />
+      <Header 
+      onLogin={currenUserEmail}
+      onLogOut={handleLogOut} />
       <CurrentUserContext.Provider value={currentUser}>
         <CardsContext.Provider value={cards}>
           <Switch>
@@ -243,10 +253,11 @@ const App = () => {
             </Route>
             <Route path="/sign-in">
               <Login 
-              onUpdater={handlerSubmitLogin} 
-              isLoginOpen={true}/>
+              onUpdater={handlerSubmitLogin} />
             </Route>
+            <Route>
             {loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />}
+            </Route>
           </Switch>
         </CardsContext.Provider>
 

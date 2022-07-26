@@ -1,0 +1,16 @@
+.header__sign-in-up-button_logout {
+    font-family: Inter, Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: right;
+    color: #FFFFFF;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    object-fit: cover;
+    border: 0px;
+    opacity: 0.6;
+}

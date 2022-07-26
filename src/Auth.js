@@ -9,14 +9,9 @@ export const register = ({password, email}) => {
     body: JSON.stringify({password, email})
   })
   .then((response) => {
-    if(response.status === 200) {
       return response.json();
-    }
   })
-  .then((res) => {
-    return res;
-  })
-
+  .then((data) => data)
 };
 
 export const authorize = ({password, email}) => {
@@ -34,7 +29,6 @@ export const authorize = ({password, email}) => {
       // return console.log(data);
     } 
   })
-  .catch(err => console.log(err))
 };
 
 export const checkToken = (token) => {

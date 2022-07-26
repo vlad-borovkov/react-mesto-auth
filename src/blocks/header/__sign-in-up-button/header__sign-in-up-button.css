@@ -1,11 +1,12 @@
-.header__sign-in-button {
-  font-family: "Inter";
+.header__sign-in-up-button {
+  font-family: Inter, Arial, sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
   text-align: right;
   color: #FFFFFF;
+  text-decoration: none;
   margin: 0;
   padding: 0;
   background-color: transparent;
@@ -13,6 +14,6 @@
   border: 0px;
 }
 
-.header__sign-in-button:hover {
+.header__sign-in-up-button:hover {
     opacity: 0.6;
   }

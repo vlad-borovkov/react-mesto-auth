@@ -1,4 +1,4 @@
-.entry-user_login-reminder {
+.entry-user__login-reminder-link {
   color: white;
   font-family: Inter, Arial, sans-serif;
   font-style: normal;
@@ -6,5 +6,10 @@
   font-size: 14px;
   line-height: 17px;
   text-align: center;
+  text-decoration: none;
   color: #ffffff;
+}
+
+.entry-user__login-reminder-link:hover {
+  opacity: 0.6;
 }
