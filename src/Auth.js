@@ -9,7 +9,9 @@ export const register = ({password, email}) => {
     body: JSON.stringify({password, email})
   })
   .then((response) => {
-    return response.json();
+    if(response.status === 200) {
+      return response.json();
+    }
   })
   .then((res) => {
     return res;

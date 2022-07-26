@@ -23,11 +23,11 @@ const Login = (props) => {
 
   return (
     <EntryUserForm
-      name="register"
+      name="login"
       title="Вход"
       buttonOnText="Войти"
       onSubmit={handlerSubmitLogin}
-      isOpen={props.isOpen}
+      isLoginOpen={props.isLoginOpen}
     >
       <input
         onChange={handleEmailChange}

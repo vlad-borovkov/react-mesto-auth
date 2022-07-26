@@ -3,7 +3,7 @@ import EntryUserForm from "./EntryUserForm";
 
 
 const Register = (props) => {
-  
+
 const [emailInput, setEmailInput] = React.useState('');
 function handleEmailChange(e) {
     setEmailInput(e.target.value)

@@ -179,20 +179,17 @@ const App = () => {
       });
   }
   const history = useHistory();
+
   //регистрация пользователя
   function handlerSubmitRegister(registerValue) {
-    
-    //console.log(registerValue);
     auth.register(registerValue)
     .then((res) => {
       if (res.data._id) {
         pushSuccessRegistration();
       }
-      else {
-        pushFailRegistration();
-      }
     })
     .catch((err) => {
+      pushFailRegistration()
       console.log(`Упс, ошибка ${err}`);
     });
   }
@@ -207,7 +204,6 @@ const App = () => {
         console.log(`Упс, ошибка ${err}`);
       });
   }
-  console.log(loggedIn)
   //получение текущего Email после авторизации и рендеринг в Header
   const [currenUserEmail, setCurrenUserEmail] = React.useState("");
   React.useEffect(() => {
@@ -229,11 +225,9 @@ const App = () => {
       <Header onLogin={currenUserEmail} />
       <CurrentUserContext.Provider value={currentUser}>
         <CardsContext.Provider value={cards}>
-        {loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />}
           <Switch>
             <ProtectedRoute
-              exact
-              path="/"
+              exact path="/"
               loggedIn={loggedIn}
               component={Main}
               onEditAvatar={handleClickAvatar}
@@ -248,8 +242,11 @@ const App = () => {
               <Register onUpdater={handlerSubmitRegister} />
             </Route>
             <Route path="/sign-in">
-              <Login onUpdater={handlerSubmitLogin} />
+              <Login 
+              onUpdater={handlerSubmitLogin} 
+              isLoginOpen={true}/>
             </Route>
+            {loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />}
           </Switch>
         </CardsContext.Provider>
 
