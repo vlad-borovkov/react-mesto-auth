@@ -109,6 +109,7 @@ const App = () => {
         console.log(`Упс, ошибка ${err}`);
       });
   }
+
   //получение текущего Email после авторизации и рендеринг в Header
   const [currenUserEmail, setCurrenUserEmail] = React.useState("");
   React.useEffect(() => {
@@ -117,17 +118,16 @@ const App = () => {
       auth
         .checkToken(jwt)
         .then((data) => setCurrenUserEmail(data.data.email))
-        .then(setCurrenUserEmail(""))
         .catch((err) => {
           console.log(`Упс, ошибка ${err}`);
         });
     }
-  }, []); //не мионтирует почту пользователя. попробовать перенести в Main или Header
+  }, [loggedIn]);
+  
   //выход из личного кабинета
   function handleLogOut() {
     localStorage.removeItem("jwt");
     setLoggedIn(false);
-    setCurrenUserEmail("");
   }
 
   //получаем глобальный стейт информации пользователя и рендерим КОГДА АВТОРИЗОВАН!
@@ -247,7 +247,7 @@ const App = () => {
 
   return (
     <div className="page">
-      <Header onLogin={currenUserEmail} onLogOut={handleLogOut} />
+      <Header onLogOut={handleLogOut} emailRender={currenUserEmail}/>
       <CurrentUserContext.Provider value={currentUser}>
         <CardsContext.Provider value={cards}>
           <Switch>

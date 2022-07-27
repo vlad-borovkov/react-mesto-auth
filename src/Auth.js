@@ -43,8 +43,10 @@ export const checkToken = (token) => {
       'Authorization': `Bearer ${token}`,
     }
   })
-  .then(res => res.json())
-  .then(data => data)
+  .then((response) => {
+    return response.json();
+})
+  .then((data) => data)
 }
 
 //вставить проверку на ответ от сервера
