@@ -15,8 +15,7 @@ const FailRegistrationPopup = (props) => {
         src={FailRegistration}
         alt="авторизация прошла успешно"
       />
-      <p className="popup__event-message">Что-то пошло не так!
-Попробуйте ещё раз.</p>
+      <p className="popup__event-message">Попробуйте ещё раз. {props.errorMessage}!</p>
     </InfoTooltip>
   );
 };

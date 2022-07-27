@@ -17,6 +17,9 @@
 @media screen and (max-width: 915px) and (min-width: 661px){
   .profile__avatar-overlay {
     margin-left: 20px;
+    position: absolute;
+    top: 0;
+    left: -14px;
   }
 }
 

@@ -86,7 +86,6 @@
 @import url(./blocks/popup/__gallery-container/popup__gallery-container.css);
 @import url(./blocks/popup/__gallery-description/popup__gallery-description.css);
 @import url(./blocks/popup/__gallery-image/popup__gallery-image.css);
-@import url(./blocks/popup/__close-icone/popup__close-icone.css);
 @import url(./blocks/popup/__container-form-input/_type/popup__container-form-input_type_error.css);
 @import url(./blocks/popup/__error/popup__error.css);
 @import url(./blocks/popup/__error/_visible/popup__error_visible.css);

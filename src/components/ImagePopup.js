@@ -7,7 +7,7 @@ const ImagePopup = (props) => {
     >
       <div className="popup__gallery-container">
         <button
-          className="popup__gallery-close-icone popup__close-icone"
+          className="popup__gallery-close-icone"
           type="button"
           onClick={props.closeAllPopup}
         ></button>

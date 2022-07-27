@@ -26,9 +26,12 @@ export const authorize = ({password, email}) => {
   .then((data) => {
     if (data){
       localStorage.setItem('jwt', data.token);
-      // return console.log(data);
+      return data;
     } 
   })
+  .catch((err) => {
+    console.log(`Упс, ошибка ${err}`);
+  });
 };
 
 export const checkToken = (token) => {
@@ -43,3 +46,10 @@ export const checkToken = (token) => {
   .then(res => res.json())
   .then(data => data)
 }
+
+//вставить проверку на ответ от сервера
+// .then((res) => {
+//   if (res.ok) {
+//     return res.json()
+//   }
+//   return Promise.reject(res.status);

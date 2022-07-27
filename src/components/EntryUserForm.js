@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 
 const EntryUserForm = (props) => {
 
@@ -24,13 +24,14 @@ const EntryUserForm = (props) => {
           </button>
           
         </form>
-        
-        <p className={`entry-user_login-reminder ${props.isLoginOpen ? "entry-user__login-reminder_off" : ""}`}>
-          Уже зарегистрированы?   <Link to="/sign-in" className="entry-user__login-reminder-link">
+        <Route path="/sign-up">
+        <p className="entry-user_login-reminder">
+          Уже зарегистрированы?&nbsp;
+          <Link to="/sign-in" className="entry-user__login-reminder-link">
           Войти
           </Link>
         </p>
-
+        </Route>
       </div>
     </div>
   );
