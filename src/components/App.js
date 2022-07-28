@@ -100,6 +100,12 @@ const App = () => {
     auth
       .authorize(registerValue)
       .then((data) => {
+        if (data){
+          localStorage.setItem('jwt', data.token);
+          return data;
+        } 
+      })
+      .then((data) => {
         if (data.token) {
           setLoggedIn(true);
         }
@@ -113,8 +119,8 @@ const App = () => {
   //получение текущего Email после авторизации и рендеринг в Header
   const [currenUserEmail, setCurrenUserEmail] = React.useState("");
   React.useEffect(() => {
-    if (localStorage.getItem("jwt")) {
-      const jwt = localStorage.getItem("jwt");
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
       auth
         .checkToken(jwt)
         .then((data) => setCurrenUserEmail(data.data.email))
@@ -183,11 +189,9 @@ const App = () => {
   const handleDeleteConfirm = () => {
     api
       .deleteCard(cardForDelete._id)
-      .then(() =>
-        setPlaceCards(cards.filter((item) => item._id !== cardForDelete._id))
-      )
-      .then(() => setCardForDelete({}))
       .then(() => {
+        setPlaceCards(cards.filter((item) => item._id !== cardForDelete._id));
+        setCardForDelete({});
         closeAllPopups();
       })
       .catch((err) => {
