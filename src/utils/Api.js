@@ -2,8 +2,10 @@ class Api {
   constructor({ domain, token }) {
     this._domain = domain;
     this._headers = {
-      authorization: token,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
+      Origin: "http://localhost:3001", // формируется автоматически браузером
+      Host: "http://localhost:3000", //
     };
   }
 
@@ -25,18 +27,18 @@ class Api {
 
   getUserValue() {
     const infoUsersDefault = "/users/me";
-    return this.makeRequest(infoUsersDefault)
+    return this.makeRequest(infoUsersDefault);
   }
 
   getCardsFromServer() {
     const cardsFromServer = "/cards";
-    return this.makeRequest(cardsFromServer)
+    return this.makeRequest(cardsFromServer);
   }
 
   changeUserInfo(userValue) {
     const requestUrl = "/users/me";
     const userData = userValue;
-    
+
     //передать объект на сервер
     return this.makeRequest(requestUrl, "PATCH", userData);
   }
@@ -53,7 +55,7 @@ class Api {
 
   changeLikeCardStatus(cardId, islikedState) {
     const requestUrl = `/cards/${cardId}/likes`;
-    return this.makeRequest(requestUrl, `${islikedState ? "PUT" : "DELETE"}`)
+    return this.makeRequest(requestUrl, `${islikedState ? "PUT" : "DELETE"}`);
   }
 
   deleteLikeOnCard(cardId) {
@@ -72,7 +74,14 @@ class Api {
   }
 }
 
+const jwt = localStorage.getItem("jwt");
+
 export const api = new Api({
-  domain: "https://mesto.nomoreparties.co/v1/cohort-42",
-  token: "96627758-08f0-44b6-bee2-1f817be1a78f",
+  domain: "http://localhost:3000", // "https://mesto.nomoreparties.co/v1/cohort-42",
+  token: jwt,
 });
+
+// export const api = new Api({
+//   domain: "https://mesto.nomoreparties.co/v1/cohort-42",
+//   token: "96627758-08f0-44b6-bee2-1f817be1a78f",
+// });

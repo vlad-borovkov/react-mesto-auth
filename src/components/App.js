@@ -82,7 +82,7 @@ const App = () => {
         return data;
       })
       .then((data) => {
-        if (data.data._id) {
+        if (data._id) {
           pushSuccessRegistration();
           history.push("/sign-in");
         }
@@ -100,10 +100,10 @@ const App = () => {
     auth
       .authorize(registerValue)
       .then((data) => {
-        if (data){
-          localStorage.setItem('jwt', data.token);
+        if (data) {
+          localStorage.setItem("jwt", data.token);
           return data;
-        } 
+        }
       })
       .then((data) => {
         if (data.token) {
@@ -129,7 +129,7 @@ const App = () => {
         });
     }
   }, [loggedIn]);
-  
+
   //выход из личного кабинета
   function handleLogOut() {
     localStorage.removeItem("jwt");
@@ -143,7 +143,8 @@ const App = () => {
       api
         .getUserValue()
         .then((res) => {
-          setCurrentUser(res);
+          console.log(res);
+          setCurrentUser(res.user);
         })
         .catch((err) => {
           console.log(`Упс, ошибка ${err}`);
@@ -157,7 +158,8 @@ const App = () => {
       api
         .getCardsFromServer()
         .then((res) => {
-          setPlaceCards(res);
+          console.log(res);
+          setPlaceCards(res.cards);
         })
         .catch((err) => {
           console.log(`Упс, ошибка ${err}`);
@@ -211,7 +213,7 @@ const App = () => {
     api
       .changeUserInfo(userValueForm)
       .then((res) => {
-        setCurrentUser(res);
+        setCurrentUser(res.user);
       })
       .then(() => {
         closeAllPopups();
@@ -224,7 +226,7 @@ const App = () => {
     api
       .changeAvatar(avatarValueForm)
       .then((res) => {
-        setCurrentUser(res);
+        setCurrentUser(res.avatar);
       })
       .then(() => {
         closeAllPopups();
@@ -237,7 +239,7 @@ const App = () => {
     api
       .handlerAddCard(newCard)
       .then((res) => {
-        setPlaceCards([res, ...cards]);
+        setPlaceCards([res.cards, ...cards]);
       })
       .then(() => {
         closeAllPopups();
@@ -251,7 +253,7 @@ const App = () => {
 
   return (
     <div className="page">
-      <Header onLogOut={handleLogOut} emailRender={currenUserEmail}/>
+      <Header onLogOut={handleLogOut} emailRender={currenUserEmail} />
       <CurrentUserContext.Provider value={currentUser}>
         <CardsContext.Provider value={cards}>
           <Switch>
