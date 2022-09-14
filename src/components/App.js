@@ -73,11 +73,10 @@ const App = () => {
     auth
       .register(registerValue)
       .then((data) => {
-        //console.log(data)
+        console.log(data);
         if (data.error) {
           setPopupErrorMessage(data.error);
           pushFailRegistration();
-          //pushSuccessRegistration();
         }
         return data;
       })
@@ -88,7 +87,6 @@ const App = () => {
         }
       })
       .catch((err) => {
-        //pushFailRegistration(errorMessage)
         console.log(`Упс, ошибка ${err}`);
       });
   }
@@ -96,7 +94,6 @@ const App = () => {
   //авторизация пользователя, стейт атворизации для защищенного роута
   const [loggedIn, setLoggedIn] = React.useState(false);
   function handlerSubmitLogin(registerValue) {
-    //console.log(registerValue);
     auth
       .authorize(registerValue)
       .then((data) => {
@@ -121,9 +118,11 @@ const App = () => {
   React.useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
-      auth
-        .checkToken(jwt)
-        .then((data) => setCurrenUserEmail(data.data.email))
+      api
+        .getUserValue()
+        .then((data) => {
+          setCurrenUserEmail(data.user.email);
+        })
         .catch((err) => {
           console.log(`Упс, ошибка ${err}`);
         });
@@ -143,7 +142,6 @@ const App = () => {
       api
         .getUserValue()
         .then((res) => {
-          console.log(res);
           setCurrentUser(res.user);
         })
         .catch((err) => {
@@ -158,7 +156,7 @@ const App = () => {
       api
         .getCardsFromServer()
         .then((res) => {
-          console.log(res);
+          //console.log(res.cards);
           setPlaceCards(res.cards);
         })
         .catch((err) => {
@@ -174,8 +172,9 @@ const App = () => {
     api
       .changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
+        console.log(newCard);
         setPlaceCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard : c))
+          state.map((item) => (item._id === card._id ? newCard.likes : item))
         );
       })
       .catch((err) => {
@@ -239,6 +238,7 @@ const App = () => {
     api
       .handlerAddCard(newCard)
       .then((res) => {
+        console.log(res.cards);
         setPlaceCards([res.cards, ...cards]);
       })
       .then(() => {

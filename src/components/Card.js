@@ -1,6 +1,7 @@
 import React from "react";
 import trashPath from "./../images/Trash.svg";
 import { CurrentUserContext } from "./../contexts/CurrentUserContext";
+import Main from "./Main";
 
 const Card = (props) => {
   const currentUserInfo = React.useContext(CurrentUserContext);
@@ -30,7 +31,7 @@ const Card = (props) => {
 
   function handleDeleteClick() {
     props.onCardDelete(props.card);
-    props.onConfirmDelete()
+    props.onConfirmDelete();
   }
 
   return (
