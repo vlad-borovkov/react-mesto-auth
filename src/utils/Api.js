@@ -76,5 +76,5 @@ class Api {
 }
 
 export const api = new Api({
-  domain: "http://api.vmesto.insta.nomoredomains.sbs", // "https://mesto.nomoreparties.co/v1/cohort-42","http://localhost:3000"
+  domain: "https://api.vmesto.insta.nomoredomains.sbs", // "https://mesto.nomoreparties.co/v1/cohort-42","http://localhost:3000"
 });
