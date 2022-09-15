@@ -1,12 +1,6 @@
 class Api {
   constructor({ domain, token }) {
     this._domain = domain;
-    // this._headers = {
-    //   Authorization: `Bearer ${token}`,
-    //   "Content-Type": "application/json",
-    //   Origin: "http://localhost:3001", // формируется автоматически браузером
-    //   Host: "http://localhost:3000", //
-    // };
   }
 
   _checkResponse(res) {
@@ -26,7 +20,7 @@ class Api {
         Authorization: `Bearer ${jwt}`,
         "Content-Type": "application/json",
         Origin: "http://localhost:3001", // формируется автоматически браузером
-        Host: "http://localhost:3000", //
+        //Host: "http://localhost:3000", //
       },
       body: JSON.stringify(body),
     }).then(this._checkResponse);
@@ -82,6 +76,5 @@ class Api {
 }
 
 export const api = new Api({
-  domain: "http://localhost:3000", // "https://mesto.nomoreparties.co/v1/cohort-42",
-  // token: jwt,
+  domain: "http://api.vmesto.insta.nomoredomains.sbs", // "https://mesto.nomoreparties.co/v1/cohort-42","http://localhost:3000"
 });

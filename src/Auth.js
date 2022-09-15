@@ -1,4 +1,4 @@
-export const BASE_URL = "http://localhost:3000"; // https://auth.nomoreparties.co
+export const BASE_URL = "http://api.vmesto.insta.nomoredomains.sbs"; // https://auth.nomoreparties.co "http://vmesto.insta.nomoredomains.sbs" "http://localhost:3000"
 
 export const register = ({ password, email }) => {
   return fetch(`${BASE_URL}/signup`, {
