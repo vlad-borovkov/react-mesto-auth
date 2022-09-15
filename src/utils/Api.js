@@ -19,7 +19,7 @@ class Api {
       headers: {
         Authorization: `Bearer ${jwt}`,
         "Content-Type": "application/json",
-        //Origin: "http://localhost:3001", // формируются автоматически браузером
+        Origin: "https://vmesto.insta.nomoredomains.sbs", // формируются автоматически браузером
         //Host: "http://localhost:3000", //
       },
       body: JSON.stringify(body),
