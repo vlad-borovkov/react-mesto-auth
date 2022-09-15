@@ -16,7 +16,8 @@
     "start": "set PORT=3001 &&react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "npm run build && scp -r ./build/* maza480@158.160.5.121:/home/maza480/frontend"
   },
   "eslintConfig": {
     "extends": [
