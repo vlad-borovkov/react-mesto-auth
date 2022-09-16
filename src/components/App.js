@@ -73,7 +73,6 @@ const App = () => {
     auth
       .register(registerValue)
       .then((data) => {
-        console.log(data);
         if (data.error) {
           setPopupErrorMessage(data.error);
           pushFailRegistration();
@@ -172,7 +171,6 @@ const App = () => {
     api
       .changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
-        console.log(newCard);
         setPlaceCards((state) =>
           state.map((item) => (item._id === card._id ? newCard.likes : item))
         );
@@ -238,7 +236,6 @@ const App = () => {
     api
       .handlerAddCard(newCard)
       .then((res) => {
-        console.log(res.cards);
         setPlaceCards([res.cards, ...cards]);
       })
       .then(() => {
