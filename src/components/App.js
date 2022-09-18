@@ -73,8 +73,8 @@ const App = () => {
     auth
       .register(registerValue)
       .then((data) => {
-        if (data.error) {
-          setPopupErrorMessage(data.error);
+        if (data.message) {
+          setPopupErrorMessage(data.message);
           pushFailRegistration();
         }
         return data;
@@ -95,6 +95,13 @@ const App = () => {
   function handlerSubmitLogin(registerValue) {
     auth
       .authorize(registerValue)
+      .then((data) => {
+        if (data.message) {
+          setPopupErrorMessage(data.message);
+          pushFailRegistration();
+        }
+        return data;
+      })
       .then((data) => {
         if (data) {
           localStorage.setItem("jwt", data.token);
